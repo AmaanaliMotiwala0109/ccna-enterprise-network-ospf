@@ -76,7 +76,7 @@ The design was fully built and tested in Cisco Packet Tracer: **6 routers, 1 ISP
 | R5 | `192.168.0.5` |
 | R6 | `192.168.0.6` |
 
-> R1 and R6 sit at the edges of the topology with a single uplink each, but they are **full OSPF participants**: both run OSPF Area 0 and also carry a static backup route. The R2 → R3/R4 → R5 core provides the redundancy between them.
+> R1 and R6 are **normal routers**, configured the same way as R2–R5: each runs OSPF Area 0 and also has a static backup route. The R2 → R3/R4 → R5 core provides the redundancy between them.
 
 ## 🧭 IP Addressing Plan
 

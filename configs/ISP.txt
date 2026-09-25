@@ -1,0 +1,15 @@
+hostname ISP
+
+! --- Interfaces ---
+interface Loopback0
+ ip address 8.8.8.8 255.255.255.255
+ description Simulates a public internet address
+
+interface FastEthernet0/0
+ ip address 203.0.113.2 255.255.255.252
+ description Link to R2 (network edge)
+
+! --- Static route back to the internal network ---
+! No OSPF here: from the internal network's point of view, this
+! router represents "the internet", so it only needs one route back.
+ip route 10.0.0.0 255.255.255.0 203.0.113.1

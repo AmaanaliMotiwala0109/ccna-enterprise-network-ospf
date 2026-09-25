@@ -1,0 +1,37 @@
+hostname R2
+
+! --- Interfaces ---
+interface Loopback0
+ ip address 192.168.0.2 255.255.255.255
+
+interface FastEthernet0/0
+ ip address 10.0.0.130 255.255.255.252
+ description Link to R1
+
+interface FastEthernet0/1
+ ip address 203.0.113.1 255.255.255.252
+ description Link to ISP
+
+interface FastEthernet1/0
+ ip address 10.0.0.133 255.255.255.252
+ description Link to R3
+
+interface FastEthernet1/1
+ ip address 10.0.0.137 255.255.255.252
+ description Link to R4
+
+! --- OSPF ---
+router ospf 1
+ network 10.0.0.0 0.0.0.255 area 0
+ network 192.168.0.0 0.0.0.255 area 0
+ default-information originate
+
+! --- Floating static backup routes (AD 150, used only if OSPF fails) ---
+ip route 10.0.0.0   255.255.255.224 10.0.0.129 150
+ip route 10.0.0.32  255.255.255.224 10.0.0.134 150
+ip route 10.0.0.64  255.255.255.224 10.0.0.138 150
+ip route 10.0.0.96  255.255.255.224 10.0.0.134 150
+ip route 10.0.0.96  255.255.255.224 10.0.0.138 150
+
+! --- Default route to the internet (AD 1, advertised into OSPF above) ---
+ip route 0.0.0.0 0.0.0.0 203.0.113.2

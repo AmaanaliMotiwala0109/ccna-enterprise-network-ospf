@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌐 Enterprise IPv4 Network with OSPF & Automatic Failover
+# 🌐 Enterprise IPv4 Network with OSPF & Redundant Path Failover
 
 ### A CCNA 200-301 portfolio project built and validated in Cisco Packet Tracer
 

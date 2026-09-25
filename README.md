@@ -129,6 +129,9 @@ The design was fully built and tested in Cisco Packet Tracer: **6 routers, 1 ISP
 ```
 ccna-enterprise-network-ospf/
 ├── README.md
+├── configs/
+│   ├── R1.txt … R6.txt                        # cleaned running-config per router
+│   └── ISP.txt
 ├── images/
 │   ├── enterprise-network-architecture.jpeg   # design diagram (top of README)
 │   ├── packet-tracer-topology.png             # full lab topology
@@ -144,6 +147,15 @@ ccna-enterprise-network-ospf/
 1. Install **Cisco Packet Tracer** (free with a Cisco Networking Academy account).
 2. Open `packet-tracer/enterprise-network.pkt`.
 3. Wait for the links to turn green, then verify using the commands below.
+
+## ⚙️ Configuration
+
+The full running-config for every device is in [`configs/`](configs/), one file per device (`R1.txt` … `R6.txt`, `ISP.txt`). Boilerplate (version, license, spanning-tree) is stripped out so only the routing-relevant parts are shown: interfaces, OSPF, and the floating static backup routes.
+
+Two things worth pointing out:
+
+- **The floating static routes are AD 150 on every router** (R1–R6), confirming the "Backup" row in the routing table above. They point to each router's directly-connected neighbor, so if OSPF ever fails, the router still has a manual path out.
+- **R2's default route has no AD specified**, so it uses the default AD of 1 — this is the route `default-information originate` advertises into OSPF for every other router to use.
 
 ## ✅ Verification & Testing
 
